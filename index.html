@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Zâmbește 😊</title>
+<style>
+  body {
+    background: linear-gradient(135deg, #fceabb, #f8b500);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    animation: fadeIn 2s ease forwards;
+    opacity: 0;
+  }
+
+  .face {
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    animation: bounce 2s infinite ease-in-out;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+  }
+
+  /* Animatie zâmbet */
+  .mouth {
+    transition: d 0.5s ease;
+  }
+
+  /* Animatie ochi care clipesc */
+  .eye {
+    transform-origin: center;
+    animation: blink 5s infinite;
+  }
+
+  .eye.right {
+    animation-delay: 2.5s;
+  }
+
+  @keyframes blink {
+    0%, 97%, 100% { transform: scaleY(1); }
+    98%, 99% { transform: scaleY(0.1); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  p, #joke {
+    max-width: 320px;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    color: #444;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  #joke {
+    font-style: italic;
+    color: #e94e77;
+    font-weight: bold;
+  }
+
+  #joke.visible {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<h1>Un zâmbet pentru tine 😊</h1>
+
+<svg class="face" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" id="face" role="img" aria-label="Față zâmbitoare">
+  <!-- Fața -->
+  <circle cx="50" cy="50" r="45" fill="#ffd1dc" stroke="#ff69b4" stroke-width="3"/>
+  <!-- Ochii -->
+  <ellipse class="eye left" cx="30" cy="40" rx="6" ry="8" fill="#000"/>
+  <ellipse class="eye right" cx="70" cy="40" rx="6" ry="8" fill="#000"/>
+  <!-- Gura (neutru) -->
+  <path id="mouth" class="mouth" d="M30 65 Q50 65 70 65" stroke="#000" stroke-width="3" fill="transparent" stroke-linecap="round"/>
+</svg>
+
+<p id="message">Apasă pe față să zâmbească și mai tare!</p>
+<p id="joke"></p>
+
+<script>
+  const mouth = document.getElementById('mouth');
+  const face = document.getElementById('face');
+  const message = document.getElementById('message');
+  const joke = document.getElementById('joke');
+  let smiling = false;
+
+  const jokes = [
+    "De ce nu poate scheletul să se certe niciodată? Pentru că nu are nervi! 😂",
+    "Ce face un calculator când îi e frig? Își dă un update de iarnă! ❄️💻",
+    "De ce a trecut puiul strada? Ca să ajungă la site-ul tău preferat! 🐥😉"
+  ];
+
+  face.addEventListener('click', () => {
+    if (!smiling) {
+      mouth.setAttribute('d', 'M30 60 Q50 80 70 60'); // zâmbet curbat în sus
+      message.textContent = "Super! Acum zâmbești și mai frumos! 😊";
+      // Arată o glumă aleatorie, cu animație fade-in
+      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+      joke.textContent = randomJoke;
+      joke.classList.add('visible');
+    } else {
+      mouth.setAttribute('d', 'M30 65 Q50 65 70 65'); // gură neutră
+      message.textContent = "Apasă pe față să zâmbească și mai tare!";
+      joke.classList.remove('visible');
+    }
+    smiling = !smiling;
+  });
+</script>
+
+</body>
+</html>
