@@ -70,7 +70,7 @@
     margin-top: 1rem;
     color: #444;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 0.8s ease;
   }
 
   #joke {
@@ -108,19 +108,28 @@
   const joke = document.getElementById('joke');
   let smiling = false;
 
-  const jokes = [
+  // Mesajele tale + glume haioase
+  const messages = [
+    "Zana mea, am crezut că ai pățit ceva!",
+    "Zănuțza mea, nu fi supărată!",
+    "Supaa, ce faciii, supaa?",
+    "Kikii 😊",
+    "Zana mea, te-ai lovit cumva?",
     "De ce nu poate scheletul să se certe niciodată? Pentru că nu are nervi! 😂",
     "Ce face un calculator când îi e frig? Își dă un update de iarnă! ❄️💻",
-    "De ce a trecut puiul strada? Ca să ajungă la site-ul tău preferat! 🐥😉"
+    "De ce a trecut puiul strada? Ca să ajungă la site-ul tău preferat! 🐥😉",
+    "Știi ce-i drăguț? Tu când zâmbești!",
+    "Ești motivul pentru care zâmbetul e contagios!",
+    "Ești ca o rază de soare într-o zi ploioasă ☀️🌧️",
+    "Vreau să fiu motivul pentru care zâmbești azi!"
   ];
 
   face.addEventListener('click', () => {
     if (!smiling) {
       mouth.setAttribute('d', 'M30 60 Q50 80 70 60'); // zâmbet curbat în sus
       message.textContent = "Super! Acum zâmbești și mai frumos! 😊";
-      // Arată o glumă aleatorie, cu animație fade-in
-      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-      joke.textContent = randomJoke;
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      joke.textContent = randomMessage;
       joke.classList.add('visible');
     } else {
       mouth.setAttribute('d', 'M30 65 Q50 65 70 65'); // gură neutră
